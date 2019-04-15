@@ -1,6 +1,6 @@
 # CarExpense
 
-CarExpense is an application built to help its users keep track of spending their money on the cars they own.
+CarExpense is an application built to help its users keep track of spending their money on maintaining the cars they own.
 
 # Tech used:
 - Spring Boot / Web, Security, JPA, Thymeleaf
