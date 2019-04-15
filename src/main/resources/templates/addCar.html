@@ -1,0 +1,85 @@
+
+	
+	<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<title>Car Expense</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/superhero/bootstrap.min.css" >
+
+	<style type="text/css">
+	
+		.container{
+			max-width: 600px;
+			margin-top:3%;
+			}
+				
+		.btn{
+		width:100%;	
+		margin-top:3%;		
+		}
+		
+	</style>
+
+</head>
+
+
+<body>
+	
+	<div class="container">
+	
+		<h1 class="display-4">Add a New Car:</h1>
+	
+		<form th:action="@{/cars}" th:object="${car}" method="post">
+		
+		<div class="row">
+		
+			<div class="col">
+		
+				<label >Brand</label>
+				<input class="form-control" th:field="*{brand}" type="text"/>
+		
+			</div>
+			
+			<div class="col">
+			
+				<label >Model</label>
+				<input class="form-control" th:field="*{model}" type="text"/>
+			
+			
+			</div>
+		
+		</div>
+		
+		<div class="row">
+		
+			<div class="col">
+				<label >Year</label>
+				<input class="form-control" th:field="*{carYear}" type="text"/>
+			</div>
+			
+			<div class="col">
+			
+				<label >Engine</label>
+				<input class="form-control" th:field="*{carEngine}" type="text"/>
+		
+			</div>
+		
+		</div>
+				<input class="btn btn-primary btn-lg" type="submit" />
+			
+		</form>
+		
+		<div class="changeCar">
+			<a href="/cars"><input type="button" class="btn btn-light btn-lg expenseButtons"  value="Change Car"/></a>
+		</div>
+		<br>
+		<a href="/">Back to Dashboard</a>
+		
+	
+	</div>
+	
+</body>
+</html>
