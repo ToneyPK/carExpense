@@ -7,6 +7,7 @@ Live Application on Heroku: https://car-expense.herokuapp.com/
 # Tech used:
 - Spring Boot / Web, Security, JPA, Thymeleaf
 - Bootstrap 4
+- Heroku & PostgreSQL
 
 # What I learned building this project:
 - Communication between Entities, Controllers, Repositories & Services
