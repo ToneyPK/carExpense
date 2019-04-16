@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -12,8 +14,12 @@ public class User {
 	
 	@Id
 	@Column(name = "username")
+	@NotNull
+	@Size(min=4,message="Please use 4 characters or more for your username." )
 	private String username;
 	
+	@NotNull
+	@Size(min=4,message="Please use 4 characters or more for your password." )
 	@Column(name = "password")
 	private String password;
 	

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<title>Car Expense</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/superhero/bootstrap.min.css" >
+
+	<style type="text/css">
+		.container{
+			max-width: 600px;
+			margin-top:3%;
+			}
+				
+		.btn{
+		width:100%;			
+		}
+		
+	.table th, .table td {
+        	vertical-align: middle;
+    	}
+    .table{
+    	margin-top:3%;
+    }	
+		
+	}
+	</style>
+
+</head>
+
+
+<body>
+	
+	<div class="container">
+	
+		<h1 class="display-4">My Car List:</h1>
+	
+		<table class="table table-striped">
+		
+			<tbody>
+			
+			<thead class="thead-dark">
+				<tr>
+		       	 	<th>Brand</th>
+		        	<th>Model</th>
+		        	<th>Year</th>
+		        	<th>Engine</th>
+		        </tr>
+			</thead>
+			
+		    
+		      <tr th:each="car : ${getCar}">
+		       		
+		       		<td th:text="${car.brand}"></td>
+			        <td th:text="${car.model}"></td>
+			        <td th:text="${car.carYear}"></td>
+			        <td th:text="${car.carEngine}"></td>
+			        
+			        <td>
+			        	<form th:action="@{|/cars/activate/${car.getiD()}|}" method="post">
+			       	 <input class="btn btn-success" value="Select" type="submit" />
+			        </form>
+			        </td>
+			        
+			        <td>
+			        	<form th:action="@{|/cars/${car.getiD()}|}" method="post">
+			        	<input class="btn btn-danger" value="Remove" type="submit" />
+			        </form> 
+			        </td>
+		      </tr>
+			
+			</tbody>
+		
+		</table>
+		
+	
+		
+		<br>
+		
+		<div class="changeCar">
+			<a href="/addCar"><input type="button" class="btn btn-light btn-lg expenseButtons"  value="Add a Car"/></a>
+		</div>
+		<br>
+		<a href="/">Back to Dashboard</a>
+			
+	
+	</div>
+	
+		
+</body>
+</html>

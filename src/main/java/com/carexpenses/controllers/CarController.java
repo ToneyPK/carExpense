@@ -1,8 +1,11 @@
 package com.carexpenses.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,7 +41,7 @@ public class CarController {
 	}
 	
 	@GetMapping("/addCar")
-	public String addCar(Model theModel){
+	public String addCar(Car car, Model theModel){
 		theModel.addAttribute("car", new Car());
 		return "addCar";
 		
@@ -51,7 +54,10 @@ public class CarController {
 	}
 	
 	@PostMapping("/cars")
-	public String addCar(@ModelAttribute Car theCar) {
+	public String addCar(@Valid @ModelAttribute Car theCar, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "/addCar";
+		}
 		theCar.setiD(0);
 		carService.addCar(theCar);
 		return "redirect:cars";
