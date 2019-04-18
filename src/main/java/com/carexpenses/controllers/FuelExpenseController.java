@@ -19,21 +19,21 @@ public class FuelExpenseController {
 
 	@Autowired
 	private FuelExpenseService fuelExpenseService;
-
+	
 	@Autowired
-	CarService carService;
-
+	private CarService carService;
+	
 	@GetMapping("/fuelExpense")
 	public String fuelExpense(Model theModel) {
 		theModel.addAttribute("activeCar", carService.getActiveCar());
 		theModel.addAttribute("fuelExpense", new FuelExpense());
 		return "fuelExpense";
-
+		
 	}
-
+	
 	@PostMapping("/fuelExpense")
 	public String addExpense(@ModelAttribute FuelExpense theFuelExpense, RedirectAttributes redirect) {
-
+		
 		//String noCarSelected = "";
 		if(carService.getActiveCar().getBrand() == null) {
 			String noCarSelected = "Please select a car first.";
@@ -42,18 +42,19 @@ public class FuelExpenseController {
 		else {
 			theFuelExpense.setFuelTransactionId(0);
 			fuelExpenseService.addFuelExpense(theFuelExpense);
-
+			
 		}
-
+		
 		return "redirect:/fuelExpense";
-
+		
 	}
-
+	
 	@GetMapping("/fuelExpense/list")
 	public String fuelExpenseList(Model theModel) {
+		
 		theModel.addAttribute("activeCar", carService.getActiveCar());
 		theModel.addAttribute("fuelExpenseList", fuelExpenseService.getAll());
 		return "fuelExpenseList";
-
+		
 	}
 }

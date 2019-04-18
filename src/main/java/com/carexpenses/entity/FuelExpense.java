@@ -1,5 +1,9 @@
 package com.carexpenses.entity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,30 +19,29 @@ public class FuelExpense {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="fuel_transaction_id")
 	private int fuelTransactionId;
-
+	
 	@Column(name="amount_liters")
 	private double amountOfLiters;
-
+	
 	@Column(name="amount_paid")
 	private double amountPaid;
-
+	
 	@Column(name = "car_id")
 	private int carId;
-
+	
+	
+	@Column(name = "date")
+	private Date date;
+	
 	public FuelExpense() {
-
+		
 	}
 
-	public FuelExpense(double amountOfLiters, double amountPaid) {
-		this.amountOfLiters = amountOfLiters;
-		this.amountPaid = amountPaid;
-	}
-
-
-	public FuelExpense(double amountOfLiters, double amountPaid, int carId) {
+	public FuelExpense(double amountOfLiters, double amountPaid, int carId, Date date) {
 		this.amountOfLiters = amountOfLiters;
 		this.amountPaid = amountPaid;
 		this.carId = carId;
+		this.date = date;
 	}
 
 	public int getFuelTransactionId() {
@@ -73,5 +76,17 @@ public class FuelExpense {
 		this.carId = carId;
 	}
 
+	public String getDate() {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");;
+		return dateFormat.format(date);
+		//return date;
+	}
 
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
+	
+	
+	
 }

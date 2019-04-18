@@ -19,36 +19,45 @@ public class Car {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="car_id")
 	private int id;
-
+	
 	@NotNull
 	@Column(name="model")
 	@Size(min=1, message="Please insert your car model.")
 	private String model;
-
+	
 	@NotNull
 	@Size(min=1, message="Please insert your car brand.")
 	@Column(name="brand")
 	private String brand;
-
+	
 	@NotNull
 	@Range(min=1900, max=2100,message="Please use a number larger than 1900.")
 	@Column(name="car_year")
-	private int carYear;
-
+		private int carYear;
+	
 	@NotNull
 	@Size(min=1, message="Please insert your car engine type.")
 	@Column(name="car_engine")
 	private String carEngine;
-
-
+	
+	
 	@Column(name="owner")
 	private String carOwner;
-
+	
 	@Column(name="active")
 	private boolean isActive;
-
+	
 	public Car() {
 	}
+
+//	public Car(String model, String brand, int carYear, String carEngine) {
+//		this.model = model;
+//		this.brand = brand;
+//		this.carYear = carYear;
+//		this.carEngine = carEngine;
+//	}
+//	
+	
 
 	public Car(String model, String brand, int carYear, String carEngine, String carOwner) {
 		this.model = model;
@@ -113,7 +122,7 @@ public class Car {
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-
-
-
+	
+	
+	
 }

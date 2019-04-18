@@ -4,50 +4,51 @@
 
 <head>
 
-<title>Car Expense</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/superhero/bootstrap.min.css">
-
-<style type="text/css">
-	.container {
+	<title>Car Expense</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/superhero/bootstrap.min.css" >
+	
+	<style type="text/css">
+	
+	.container{
 		max-width: 600px;
+		margin-top:3%;
+		}
+		
+	.currentStatus{
+		margin-bottom:3%;
+		}
+	
+	.form-control{
+		width:100%;
+	}	
+		
+	.row{
+	margin-top: 2%;
+	}	
+	
+	.currentStatus p{
+		font-size:1.1em;
+		margin:0;
+		}
+		
+	.activeCar{
+		color:white;
+		}
+	
+	.btn{
+		width:100%;
 		margin-top: 3%;
-	}
-	
-	.currentStatus {
-		margin-bottom: 3%;
-	}
-	
-	.form-control {
-		width: 100%;
-	}
-	
-	.row {
-		margin-top: 2%;
-	}
-	
-	.currentStatus p {
-		font-size: 1.1em;
-		margin: 0;
-	}
-	
-	.activeCar {
-		color: white;
-	}
-	
-	.btn {
-		width: 100%;
-		margin-top: 3%;
-	}
+	}		
 	
 	.changeCar a {
 		text-decoration: none;
-	}
+		}
 	
 	.noCarSelected {
-		margin-top: 3%;
-	}
-</style>
+		margin-top:3%;
+	}	
+		
+	</style>
 </head>
 
 
@@ -55,64 +56,59 @@
 
 	<div class="container">
 		<h1 class="display-4">New Fuel Expense</h1>
-
+		
 		<div class="currentStatus">
-
-			<p class="text-muted">
-				User logged: <span
-					th:text="${#request.userPrincipal.principal.username}"></span>
-			</p>
-			<p class="text-muted">
-				Selected car: <span class="activeCar"
-					th:text="${activeCar.getBrand() + ' ' + activeCar.getModel() + ' ' + activeCar.getCarYear() + ' ' + activeCar.getCarEngine()}"></span>
-			</p>
-
+		
+			<p class="text-muted">User logged: <span th:text="${#request.userPrincipal.principal.username}"></span></p>
+			<p class="text-muted">Selected car: <span class="activeCar" th:text="${activeCar.getBrand() + ' ' + activeCar.getModel() + ' ' + activeCar.getCarYear() + ' ' + activeCar.getCarEngine()}"></span></p>
+	
 		</div>
-
-		<form th:action="@{/fuelExpense}" th:object="${fuelExpense}"
-			method="post">
-
-			<div class="row">
-
-				<div class="col">
-
-					<div class="fuelAmount">
-
-						<label>Fuel Amount in Liters</label> <input class="form-control"
-							th:field="*{amountOfLiters}" type="text" />
-
-					</div>
-
+		
+		<form th:action="@{/fuelExpense}" th:object="${fuelExpense}" method="post">
+		
+		<div class="row">
+		
+			<div class="col">
+		
+				<div class="fuelAmount">
+				
+					<label>Fuel Amount in Liters</label>
+					<input class="form-control" th:field="*{amountOfLiters}" type="text" />
+		
 				</div>
-
-				<div class="col">
-
-					<div class="amountPaid">
-						<label>Amount Paid in <span>&#8364;</span></label> <input
-							class="form-control" th:field="*{amountPaid}" type="text" />
-					</div>
-
-				</div>
-
+		
 			</div>
-
-
-			<span class="noCarSelected" th:text="${noCarSelected}"></span> <input
-				class="btn btn-primary btn-lg" type="submit" />
-
-		</form>
-
-		<div class="changeCar">
-			<a href="/cars"><input type="button"
-				class="btn btn-light btn-lg expenseButtons" value="Change Car" /></a>
-
+			
+			<div class="col">
+		
+				<div class="amountPaid">
+					<label>Amount Paid in <span>&#8364;</span></label>
+					<input class="form-control" th:field="*{amountPaid}" type="text" />	
+				</div>
+		
+			</div>
+		
 		</div>
-		<br> <a href="/">Back to Dashboard</a>
-
+		
+			
+			<span class="noCarSelected" th:text="${noCarSelected}" ></span>
+			
+			
+		<input class="btn btn-primary btn-lg" type="submit" />
+		
+		</form>
+		
+		<div class="changeCar">
+			<a href="/cars"><input type="button" class="btn btn-light btn-lg expenseButtons"  value="Change Car"/></a>
+		
+		</div>
+		<br>
+		<a href="/">Back to Dashboard</a>
+		
 	</div>
-
-
-
-
+	
+	
+	
+	
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.carexpenses.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,11 @@ public class RepairExpenseServiceImpl implements RepairExpenseService {
 
 	@Autowired
 	private CarService carService;
-
+	
 	@Override
 	public List<RepairExpense> getAll() {
-
+		
+	//	return repairExpenseRepository.findAll();
 		return getActiveRepairExpenses();
 	}
 
@@ -29,6 +31,10 @@ public class RepairExpenseServiceImpl implements RepairExpenseService {
 	public void addRepairExpense(RepairExpense theRepairExpense) {
 		int carId = carService.getActiveCar().getiD();
 		theRepairExpense.setCarId(carId);
+		
+		Date date = new Date();
+		theRepairExpense.setDate(date);
+		
 		repairExpenseRepository.save(theRepairExpense);
 
 	}
@@ -38,18 +44,18 @@ public class RepairExpenseServiceImpl implements RepairExpenseService {
 		List<RepairExpense> allRepairExpenses = repairExpenseRepository.findAll();
 		List<RepairExpense> activeRepairExpenses = new ArrayList<RepairExpense>();
 		Car activeCar= carService.getActiveCar();
-
+		
 		for (RepairExpense repairExpense : allRepairExpenses) {
-
+			
 			if(repairExpense.getCarId() == activeCar.getiD()) {
 				activeRepairExpenses.add(repairExpense);
-
+				
 			}
-
+			
 		}
-
+		
 		return activeRepairExpenses;
-
+		
 	}
 
 }

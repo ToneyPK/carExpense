@@ -1,5 +1,9 @@
 package com.carexpenses.entity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,13 +29,22 @@ public class RepairExpense {
 	@Column(name = "car_id")
 	private int carId;
 	
+	@Column(name = "date")
+	private Date date;
+	
+	@Column(name = "description")
+	private String description;
+	
 	public RepairExpense() {
 		
 	}
-
-	public RepairExpense(String repairName, double repairCost) {
+	
+	public RepairExpense(String repairName, double repairCost, int carId, Date date, String description) {
 		this.repairName = repairName;
 		this.repairCost = repairCost;
+		this.carId = carId;
+		this.date = date;
+		this.description = description;
 	}
 
 	public int getRepairTransactionIdl() {
@@ -65,6 +78,25 @@ public class RepairExpense {
 	public void setCarId(int carId) {
 		this.carId = carId;
 	}
+
+	public String getDate() {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");;
+		return dateFormat.format(date);
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
 	
 	
 }

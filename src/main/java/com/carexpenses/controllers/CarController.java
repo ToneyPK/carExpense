@@ -31,36 +31,36 @@ public class CarController {
 		theModel.addAttribute("getCar",carService.getCarsByOwner());
 		theModel.addAttribute("car", new Car());
 		return "cars.html";
-
+		
 	}
-
+	
 	@PostMapping("/cars/activate/{id}")
 	public String setActiveCar(@PathVariable int id) {
-		carService.setActiveCar(id);
-		return "redirect:/";
+			carService.setActiveCar(id);
+			return "redirect:/";
 	}
-
+	
 	@GetMapping("/addCar")
 	public String addCar(Car car, Model theModel){
 		theModel.addAttribute("car", new Car());
 		return "addCar";
-
+		
 	}
-
+	
 	@PostMapping("/cars/{id}")
 	public String removeCarById(@PathVariable int id) {
 		carService.removeCarById(id);
 		return "redirect:/cars";
 	}
-
+	
 	@PostMapping("/cars")
 	public String addCar(@Valid @ModelAttribute Car theCar, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
-			return "addCar";
+			return "/addCar";
 		}
 		theCar.setiD(0);
 		carService.addCar(theCar);
 		return "redirect:cars";
 	}
-
+	
 }

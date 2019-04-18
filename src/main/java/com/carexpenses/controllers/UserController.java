@@ -21,38 +21,39 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+
 	@Autowired
 	public UserController(UserService userService) {
 		this.userService = userService;
 	}
-
+	
 	@GetMapping("/register")
 	public String showPage(Model theModel, User theUser) {
-
+		
 		theModel.addAttribute("user", new User());
 		return "register";
 	}
-
+	
 	@PostMapping("/register")
 	public String newUser(@Valid User theUser,BindingResult bindingResult, RedirectAttributes model ) {
-
+		
 		if(bindingResult.hasErrors()) {
 			return "register";
 		}
-
+				
 		if(userService.checkIfUserExists(theUser)) {
-
+			
 			model.addFlashAttribute("errorMsg","User already registered.");
 			return "redirect:/register";
-
+						
 		}
-
+		
 		model.addFlashAttribute("successMessage", "You have been successfully registered! You can now log in.");
-
+				
 		userService.registerUser(theUser);
 		return "redirect:/login";
 	}
-
-
-
+	
+	
+	
 }
