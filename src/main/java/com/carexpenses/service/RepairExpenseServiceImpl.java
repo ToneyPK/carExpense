@@ -18,11 +18,10 @@ public class RepairExpenseServiceImpl implements RepairExpenseService {
 
 	@Autowired
 	private CarService carService;
-	
+
 	@Override
 	public List<RepairExpense> getAll() {
-		
-	//	return repairExpenseRepository.findAll();
+
 		return getActiveRepairExpenses();
 	}
 
@@ -39,18 +38,18 @@ public class RepairExpenseServiceImpl implements RepairExpenseService {
 		List<RepairExpense> allRepairExpenses = repairExpenseRepository.findAll();
 		List<RepairExpense> activeRepairExpenses = new ArrayList<RepairExpense>();
 		Car activeCar= carService.getActiveCar();
-		
+
 		for (RepairExpense repairExpense : allRepairExpenses) {
-			
+
 			if(repairExpense.getCarId() == activeCar.getiD()) {
 				activeRepairExpenses.add(repairExpense);
-				
+
 			}
-			
+
 		}
-		
+
 		return activeRepairExpenses;
-		
+
 	}
 
 }

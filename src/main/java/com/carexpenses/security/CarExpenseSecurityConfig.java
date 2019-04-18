@@ -22,9 +22,6 @@ public class CarExpenseSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource securityDataSource;
 	
-//	@SuppressWarnings("deprecation")
-//	UserBuilder users = User.withDefaultPasswordEncoder();
-//	
 	@Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -33,9 +30,6 @@ public class CarExpenseSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().dataSource(securityDataSource);
-//		auth.inMemoryAuthentication().
-//		withUser(User.withUsername("toni").password("{noop}toni").roles("sranje"));
-		
 		
 	}
 	

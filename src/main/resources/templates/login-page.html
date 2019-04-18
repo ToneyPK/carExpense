@@ -4,20 +4,20 @@
 
 <head>
 
-	<title>Car Expense</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/superhero/bootstrap.min.css" >
-	
-	<style type="text/css">
-	
-	.container{
-	max-width: 600px;
-	margin-top:5%;
+<title>Car Expense</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/superhero/bootstrap.min.css">
+
+<style type="text/css">
+	.container {
+		max-width: 600px;
+		margin-top: 5%;
 	}
 	
-	.successMessage{
-	color: lightgreen;
+	.successMessage {
+		color: lightgreen;
 	}
-	</style>
+</style>
 
 </head>
 
@@ -27,34 +27,32 @@
 	<div class="container">
 		<h1>Welcome to CarExpense</h1>
 		<h3>Please Login:</h3>
-		
-		<p class="successMessage" th:text="${successMessage}" ></p>
-		
-		<form th:action="@{/login}" method="POST" >
-		
-		<div th:if="${param.error}">Invalid username and password.</div>
-		<div th:if="${param.logout}">You have been logged out.</div>
-		
-		<div class="form-group">
-			<label>Username:</label>
-			<input class="form-control" type="text" name="username">
-		</div>
-		
-		<div class="form-group">
-			<label>Password:</label>
-			<input class="form-control" type="password" name="password">
-		</div>
-		
-		<input class="btn btn-primary btn-lg" type="submit" value="Login" />
-		
+
+		<p class="successMessage" th:text="${successMessage}"></p>
+
+		<form th:action="@{/login}" method="POST">
+
+			<div th:if="${param.error}">Invalid username and password.</div>
+			<div th:if="${param.logout}">You have been logged out.</div>
+
+			<div class="form-group">
+				<label>Username:</label> <input class="form-control" type="text"
+					name="username">
+			</div>
+
+			<div class="form-group">
+				<label>Password:</label> <input class="form-control" type="password"
+					name="password">
+			</div>
+
+			<input class="btn btn-primary btn-lg" type="submit" value="Login" />
+
 		</form>
-		
-		
-		<br>
-		
-		<a href="/register">Not Registered? Register Now!</a>
+
+
+		<br> <a href="/register">Not Registered? Register Now!</a>
 		<p class="text-muted">Developed by: Antonio Pekeljevic</p>
-			
+
 	</div>
 
 </body>

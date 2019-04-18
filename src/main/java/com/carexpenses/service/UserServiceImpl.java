@@ -21,15 +21,15 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private UserRoleRepository userRoleRepository;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	
-	
+
+
 	@Autowired
 	public UserServiceImpl(UserRepository userRepository) {
 		this.userRepository = userRepository;
@@ -39,10 +39,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void registerUser(User theUser) {
-		theUser.setEnabled(true);
-		// insert user role to db here
-		
-		
+		theUser.setEnabled(true);		
 		theUser.setPassword(passwordEncoder.encode( theUser.getPassword()));
 		userRepository.save(theUser);
 		UserRole userRole = new UserRole();
@@ -63,16 +60,15 @@ public class UserServiceImpl implements UserService {
 	public boolean checkIfUserExists(User theUser) {
 		boolean usersExists = userRepository.existsById(theUser.getUsername());
 		boolean exists = false;
-		
-		//compare theuser to all users
+	
 		if(usersExists) {
 			exists = true;
 		}
-		
+
 		return exists;
 	}
 
-		
-	}
+
+}
 
 

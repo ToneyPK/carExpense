@@ -16,7 +16,7 @@ import com.carexpenses.entity.Car;
 public class CarServiceImpl implements CarService {
 
 	private CarRepository carRepository;
-	
+
 	@Autowired
 	public CarServiceImpl(CarRepository carRepository) {
 		this.carRepository = carRepository;
@@ -31,8 +31,8 @@ public class CarServiceImpl implements CarService {
 	@Transactional
 	public void addCar(Car theCar) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String user  = auth.getName(); //get logged in username
-		
+		String user  = auth.getName(); //get logged in username
+
 		theCar.setCarOwner(user);
 		carRepository.save(theCar);
 	}
@@ -41,15 +41,15 @@ public class CarServiceImpl implements CarService {
 	@Transactional
 	public void removeCarById(int id) {
 		carRepository.deleteById(id);
-		
+
 	}
 
 	@Override
-	
+
 	public List<Car> getCarsByOwner() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String user  = auth.getName(); //get logged in username
-		
+		String user  = auth.getName(); //get logged in username
+
 		return carRepository.listCarsByOwner(user);
 	}
 
@@ -58,9 +58,9 @@ public class CarServiceImpl implements CarService {
 	public Car findCarById(int id) {
 		Optional<Car> opCar = carRepository.findById(id);
 		Car car = opCar.get();
-		
+
 		return car;
-		
+
 	}
 
 	@Override
@@ -81,17 +81,17 @@ public class CarServiceImpl implements CarService {
 	public Car getActiveCar() {
 		Car activeCar = new Car();
 		List<Car> carList = getCarsByOwner();
-		
+
 		for (Car car : carList) {
 			if(car.isActive()==true) {
 				activeCar = car;
 			}
 		}
-		
+
 		return activeCar;
 	}
 
-	
+
 
 
 }

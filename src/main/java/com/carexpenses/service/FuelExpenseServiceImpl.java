@@ -15,10 +15,10 @@ import com.carexpenses.entity.FuelExpense;
 public class FuelExpenseServiceImpl implements FuelExpenseService {
 
 	private FuelExpenseRepository fuelExpenseRepository;
-	
+
 	@Autowired
 	private CarService carService;
-	
+
 	@Autowired
 	public FuelExpenseServiceImpl(FuelExpenseRepository fuelExpenseRepository) {
 		this.fuelExpenseRepository = fuelExpenseRepository;
@@ -29,27 +29,27 @@ public class FuelExpenseServiceImpl implements FuelExpenseService {
 	public List<FuelExpense> getAll() {
 		//List<FuelExpense> allFuelExpenses = fuelExpenseRepository.findAll();
 		List<FuelExpense> activeFuelExpenses = getActiveFuelExpenses();
-		
-		 return activeFuelExpenses;
+
+		return activeFuelExpenses;
 	}
-	
+
 	@Override
 	public List<FuelExpense> getActiveFuelExpenses(){
 		List<FuelExpense> allFuelExpenses = fuelExpenseRepository.findAll();
 		List<FuelExpense> activeFuelExpenses = new ArrayList<FuelExpense>();
 		Car activeCar= carService.getActiveCar();
-		
+
 		for (FuelExpense fuelExpense : allFuelExpenses) {
-			
+
 			if(fuelExpense.getCarId() == activeCar.getiD()) {
 				activeFuelExpenses.add(fuelExpense);
-				
+
 			}
-			
+
 		}
-		
+
 		return activeFuelExpenses;
-		
+
 	}
 
 	@Override
@@ -58,11 +58,11 @@ public class FuelExpenseServiceImpl implements FuelExpenseService {
 		int carId = carService.getActiveCar().getiD();
 		theFuelExpense.setCarId(carId);
 		theFuelExpense.setFuelTransactionId(0);
-		 fuelExpenseRepository.save(theFuelExpense);
-		
-		
+		fuelExpenseRepository.save(theFuelExpense);
+
+
 	}
 
-	
+
 
 }

@@ -4,83 +4,89 @@
 
 <head>
 
-	<title>Car Expense</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/superhero/bootstrap.min.css" >
+<title>Car Expense</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/superhero/bootstrap.min.css">
 
-	<style type="text/css">
-		.container{
-			max-width: 600px;
-			margin-top:3%;
-			}
-	
-		.currentStatus{
-		margin-bottom:3%;
-		
-		}
-		.currentStatus{
-		margin-bottom:3%;
-		}
-		
-		.activeCar{
-		color:white;
-		}
-		
-		.currentStatus p{
-		font-size:1.1em;
-		margin:0;
-		}
-		
-		.btn{
-		width:100%;
+<style type="text/css">
+	.container {
+		max-width: 600px;
 		margin-top: 3%;
 	}
-		
-		}
-	</style>
+	
+	.currentStatus {
+		margin-bottom: 3%;
+	}
+	
+	.currentStatus {
+		margin-bottom: 3%;
+	}
+	
+	.activeCar {
+		color: white;
+	}
+	
+	.currentStatus p {
+		font-size: 1.1em;
+		margin: 0;
+	}
+	
+	.btn {
+		width: 100%;
+		margin-top: 3%;
+	}
+
+</style>
 </head>
 
 
 <body>
 
 	<div class="container">
-	
+
 		<h1 class="display-4">Repair Expense Lisst</h1>
-				<div class="currentStatus">
-				
-					<p class="text-muted">User logged: <span th:text="${#request.userPrincipal.principal.username}"></span></p>
-					<p class="text-muted">Selected car: <span class="activeCar" th:text="${activeCar.getBrand() + ' ' + activeCar.getModel() + ' ' + activeCar.getCarYear() + ' ' + activeCar.getCarEngine()}"></span></p>
-			
-				</div>
-		<table class="table table-striped table-bordered">
-		
-		<tbody>
-		
-		<tr>
-		<thead class="thead-dark">
-			<th >Repair Name</th>
-	        <th>Repair Cost</th>
-	    
-		</thead>
-	      </tr>
-	      <tr th:each="repairExpense : ${repairExpenseList}">
-	        <td th:text="${repairExpense.getRepairName()} "></td>
-	        <td th:text="${repairExpense.getRepairCost()} + '&#8364;'"></td>
-	        
-	      </tr>
-		
-		</tbody>
-		
-		</table>
-		
-		
-		<div class="changeCar">
-			<a href="/cars"><input type="button" class="btn btn-light btn-lg expenseButtons"  value="Change Car"/></a>
+		<div class="currentStatus">
+
+			<p class="text-muted">
+				User logged: <span
+					th:text="${#request.userPrincipal.principal.username}"></span>
+			</p>
+			<p class="text-muted">
+				Selected car: <span class="activeCar"
+					th:text="${activeCar.getBrand() + ' ' + activeCar.getModel() + ' ' + activeCar.getCarYear() + ' ' + activeCar.getCarEngine()}"></span>
+			</p>
+
 		</div>
-		<br>
-		<a href="/">Back to Dashboard</a>
-		
-	
+		<table class="table table-striped table-bordered">
+
+			<tbody>
+
+				<tr>
+			<thead class="thead-dark">
+				<th>Repair Name</th>
+				<th>Repair Cost</th>
+
+			</thead>
+			</tr>
+			<tr th:each="repairExpense : ${repairExpenseList}">
+				<td th:text="${repairExpense.getRepairName()} "></td>
+				<td th:text="${repairExpense.getRepairCost()} + '&#8364;'"></td>
+
+			</tr>
+
+			</tbody>
+
+		</table>
+
+
+		<div class="changeCar">
+			<a href="/cars"><input type="button"
+				class="btn btn-light btn-lg expenseButtons" value="Change Car" /></a>
+		</div>
+		<br> <a href="/">Back to Dashboard</a>
+
+
 	</div>
-	
+
 </body>
 </html>

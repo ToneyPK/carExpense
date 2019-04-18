@@ -15,26 +15,25 @@ public class FuelExpense {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="fuel_transaction_id")
 	private int fuelTransactionId;
-	
+
 	@Column(name="amount_liters")
 	private double amountOfLiters;
-	
+
 	@Column(name="amount_paid")
 	private double amountPaid;
-	
+
 	@Column(name = "car_id")
 	private int carId;
-	
+
 	public FuelExpense() {
-		
+
 	}
 
 	public FuelExpense(double amountOfLiters, double amountPaid) {
 		this.amountOfLiters = amountOfLiters;
 		this.amountPaid = amountPaid;
 	}
-	
-	
+
 
 	public FuelExpense(double amountOfLiters, double amountPaid, int carId) {
 		this.amountOfLiters = amountOfLiters;
@@ -73,6 +72,6 @@ public class FuelExpense {
 	public void setCarId(int carId) {
 		this.carId = carId;
 	}
-	
-	
+
+
 }

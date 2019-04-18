@@ -4,78 +4,76 @@
 
 <head>
 
-	<title>Car Expense</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/superhero/bootstrap.min.css" >
-	
-	<style type="text/css">
-	
-		.container{
+<title>Car Expense</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/superhero/bootstrap.min.css">
+
+<style type="text/css">
+	.container {
 		max-width: 600px;
-		margin-top:3%;
-		}
-		
-		.currentStatus{
-		margin-bottom:3%;
-		}
-		
-		.expenseButtons{
-		display:block;
-		width:100%;
-		margin-top:2%;
-		}
-		
-		h1{
+		margin-top: 3%;
+	}
+	
+	.currentStatus {
+		margin-bottom: 3%;
+	}
+	
+	.expenseButtons {
+		display: block;
+		width: 100%;
+		margin-top: 2%;
+	}
+	
+	h1 {
 		margin-bottom: 2%;
-		}
-		
-		form{
-		
-		margin-top:2%;
-		}
-		
-		.fuelExpenses{
+	}
+	
+	form {
+		margin-top: 2%;
+	}
+	
+	.fuelExpenses {
 		margin-top: 2%;
 		border: 1px solid white;
 		padding: 10px;
-		}
-		
-		.repairExpenses{
+	}
+	
+	.repairExpenses {
 		margin-top: 2%;
 		border: 1px solid white;
 		padding: 10px;
-		}
-		
-		.totalExpenses{
-		font-size:1.8em;
-		margin-top:3%;
-		}
-		
-		.activeCar{
-		color:white;
-		}
-		.currentStatus p{
-		font-size:1.1em;
-		margin:0;
-		}
-		
-		.fuelExpenses p{
-		margin:0;
-		}
-		
-		.repairExpenses p{
-		margin:0;
-		}
-		
-		.expenseButtons a {
+	}
+	
+	.totalExpenses {
+		font-size: 1.8em;
+		margin-top: 3%;
+	}
+	
+	.activeCar {
+		color: white;
+	}
+	
+	.currentStatus p {
+		font-size: 1.1em;
+		margin: 0;
+	}
+	
+	.fuelExpenses p {
+		margin: 0;
+	}
+	
+	.repairExpenses p {
+		margin: 0;
+	}
+	
+	.expenseButtons a {
 		text-decoration: none;
-		}
-		
-		.changeCar a {
+	}
+	
+	.changeCar a {
 		text-decoration: none;
-		}
-		
-		
-	</style>
+	}
+</style>
 
 </head>
 
@@ -85,71 +83,82 @@
 	<div class="container">
 
 		<h1 class="display-4">My Dashboard</h1>
-		
+
 		<div class="currentStatus">
-		
-			<p class="text-muted">User logged: <span th:text="${#request.userPrincipal.principal.username}"></span></p>
-			<p class="text-muted">Selected car:
-				
-				<span th:if="${activeCar.getBrand() != null}"> 
-					<span class="activeCar" th:text="${activeCar.getBrand() + ' ' + activeCar.getModel() 
-					+ ' ' + activeCar.getCarYear() + ' ' + activeCar.getCarEngine()}">
-					</span>
-				</span>
-				
-				<span	th:unless="${activeCar.getBrand() != null}">
-					<span class="activeCar" th:text="${noCarSelected}"></span>
-				</span>
-				
+
+			<p class="text-muted">
+				User logged: <span
+					th:text="${#request.userPrincipal.principal.username}"></span>
 			</p>
-	
+			<p class="text-muted">
+				Selected car: <span th:if="${activeCar.getBrand() != null}">
+					<span class="activeCar"
+					th:text="${activeCar.getBrand() + ' ' + activeCar.getModel() 
+					+ ' ' + activeCar.getCarYear() + ' ' + activeCar.getCarEngine()}">
+				</span>
+				</span> <span th:unless="${activeCar.getBrand() != null}"> <span
+					class="activeCar" th:text="${noCarSelected}"></span>
+				</span>
+
+			</p>
+
 		</div>
-				
+
 		<div class="expenseButtons">
 
-			<a  href="fuelExpense"><input type="button" class="btn btn-primary btn-lg expenseButtons" value="New Fuel Expense"/></a>
-			<a href="repairExpense"><input type="button" class="btn btn-primary btn-lg expenseButtons"  value="New Repair Expense"/></a>
-						
+			<a href="fuelExpense"><input type="button"
+				class="btn btn-primary btn-lg expenseButtons"
+				value="New Fuel Expense" /></a> <a href="repairExpense"><input
+				type="button" class="btn btn-primary btn-lg expenseButtons"
+				value="New Repair Expense" /></a>
+
 		</div>
-		
+
 		<div class="fuelExpenses">
-			<p>Total Fuel Expenses: <span th:text="${allFuelExpenses}"/> <span>&#8364;</span></p>
-			<a href="fuelExpense/list">View Fuel List</a> 
+			<p>
+				Total Fuel Expenses: <span th:text="${allFuelExpenses}" /> <span>&#8364;</span>
+			</p>
+			<a href="fuelExpense/list">View Fuel List</a>
 		</div>
 
 		<div class="repairExpenses">
-			<p>Total Repair Expenses: <span th:text="${allRepairExpenses}"/> <span>&#8364;</span></p>
+			<p>
+				Total Repair Expenses: <span th:text="${allRepairExpenses}" /> <span>&#8364;</span>
+			</p>
 			<a href="repairExpense/list">View Repair List</a>
-		</div>		
-		
-		<p class="totalExpenses">Total expenses: <span th:text="${totalExpenses}"/> <span>&#8364;</span></p>
-		
+		</div>
+
+		<p class="totalExpenses">
+			Total expenses: <span th:text="${totalExpenses}" /> <span>&#8364;</span>
+		</p>
+
 		<span th:if="${activeCar.getBrand() == null}">
-		
+
 			<div class="changeCar">
-				<a href="addCar"><input type="button" class="btn btn-light btn-lg expenseButtons"  value="Add a Car"/></a>
+				<a href="addCar"><input type="button"
+					class="btn btn-light btn-lg expenseButtons" value="Add a Car" /></a>
 			</div>
-		
+
+		</span> <span th:unless="${activeCar.getBrand() == null}">
+
+			<div class="changeCar">
+				<a href="cars"><input type="button"
+					class="btn btn-light btn-lg expenseButtons" value="Change Car" /></a>
+
+			</div>
+
 		</span>
 
-		<span th:unless="${activeCar.getBrand() == null}">
-		
-			<div class="changeCar">
-			<a href="cars"><input type="button" class="btn btn-light btn-lg expenseButtons"  value="Change Car"/></a>
-		
-		</div>
-		
-		 </span>
-		
-		
+
 		<form th:action="@{/logout}" method="POST">
-			<input class="btn btn-secondary form-control" type="submit" value="Logout" />
+			<input class="btn btn-secondary form-control" type="submit"
+				value="Logout" />
 		</form>
-	
-	
+
+
 	</div>
 
-	
-	
+
+
 </body>
 </html>
