@@ -46,7 +46,18 @@
 	
 	.noCarSelected {
 		margin-top:3%;
-	}	
+	}
+	
+	.viewList{
+		float: right;
+		margin:0;
+	}
+	
+	span.successMessage {
+	margin-top:3%;
+    color: lightgreen;
+	}
+		
 		
 	</style>
 </head>
@@ -87,9 +98,10 @@
 				</div>
 		
 			</div>
-		
+						
 		</div>
 		
+			<span class="successMessage" th:text="${successMessage}"></span>
 			
 			<span class="noCarSelected" th:text="${noCarSelected}" ></span>
 			
@@ -103,7 +115,8 @@
 		
 		</div>
 		<br>
-		<a href="/">Back to Dashboard</a>
+		<a href="/"> &#8592; Back to Dashboard</a>
+		<a class="viewList" href="/fuelExpense/list">View Fuel Expense List &#8594;</a>
 		
 	</div>
 	

@@ -44,8 +44,18 @@
 	}	
 		
 	.row{
-	margin-top: 2%;
-	}				
+		margin-top: 2%;
+	}		
+	
+	.viewList{
+		float:right;
+	}
+	
+	p.successMessage{
+    	color: lightgreen;
+    	margin-top: 2%;
+    	margin-bottom: 0;
+	}		
 	
 	</style>
 </head>
@@ -90,6 +100,7 @@
 				
 				</div>
 						
+			<p class="successMessage" th:text="${successMessage}"></p>			
 			<input class="btn btn-primary btn-lg" type="submit" />
 			
 			<span th:text="${noCarSelected}"></span>
@@ -101,7 +112,9 @@
 			</div>
 
 			<br>
-			<a href="/">Back to Dashboard</a>
+			
+			<a href="/"> &#8592; Back to Dashboard</a>
+			<a class="viewList" href="/repairExpense/list">View Repair Expense List &#8594;</a>
 		</div>
 
 	</body>

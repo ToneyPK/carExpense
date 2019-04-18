@@ -41,6 +41,11 @@ public class RepairExpenseController {
 					theRepairExpense.setRepairTransactionIdl(0);
 					repairExpenseService.addRepairExpense(theRepairExpense);
 					
+					String infoMessage = "You have successfully added " + theRepairExpense.getRepairName() 
+					+ " at the price of " + theRepairExpense.getRepairCost() + " €";
+					
+					redirect.addFlashAttribute("successMessage",infoMessage);
+					
 				}
 				
 				return "redirect:/repairExpense";

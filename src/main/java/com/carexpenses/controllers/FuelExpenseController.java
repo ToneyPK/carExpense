@@ -24,7 +24,7 @@ public class FuelExpenseController {
 	private CarService carService;
 	
 	@GetMapping("/fuelExpense")
-	public String fuelExpense(Model theModel) {
+	public String fuelExpense(FuelExpense fuelExpense, Model theModel) {
 		theModel.addAttribute("activeCar", carService.getActiveCar());
 		theModel.addAttribute("fuelExpense", new FuelExpense());
 		return "fuelExpense";
@@ -42,7 +42,9 @@ public class FuelExpenseController {
 		else {
 			theFuelExpense.setFuelTransactionId(0);
 			fuelExpenseService.addFuelExpense(theFuelExpense);
-			
+			String infoMessage = "You have successfully added " + theFuelExpense.getAmountOfLiters() 
+			+ "l at the price of " + theFuelExpense.getAmountPaid() + " €";
+			redirect.addFlashAttribute("successMessage",infoMessage);
 		}
 		
 		return "redirect:/fuelExpense";
