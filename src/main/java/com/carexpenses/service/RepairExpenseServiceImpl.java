@@ -31,7 +31,7 @@ public class RepairExpenseServiceImpl implements RepairExpenseService {
 	public void addRepairExpense(RepairExpense theRepairExpense) {
 		int carId = carService.getActiveCar().getiD();
 		theRepairExpense.setCarId(carId);
-		
+				
 		Date date = new Date();
 		theRepairExpense.setDate(date);
 		

@@ -35,16 +35,21 @@ public class RepairExpense {
 	@Column(name = "description")
 	private String description;
 	
+	@Column(name = "mileage")
+	private int mileage;
+	
 	public RepairExpense() {
 		
 	}
 	
-	public RepairExpense(String repairName, double repairCost, int carId, Date date, String description) {
+	public RepairExpense(String repairName, double repairCost, int carId, 
+			Date date, String description, int mileage) {
 		this.repairName = repairName;
 		this.repairCost = repairCost;
 		this.carId = carId;
 		this.date = date;
 		this.description = description;
+		this.mileage = mileage;
 	}
 
 	public int getRepairTransactionIdl() {
@@ -94,6 +99,14 @@ public class RepairExpense {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getMileage() {
+		return mileage;
+	}
+
+	public void setMileage(int mileage) {
+		this.mileage = mileage;
 	}
 	
 	
