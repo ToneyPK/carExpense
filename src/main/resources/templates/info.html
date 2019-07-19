@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>Car Expense</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/superhero/bootstrap.min.css" >
+
+    <style type="text/css">
+
+        .container{
+            max-width: 900px;
+            margin-top:3%;
+        }
+
+        .currentStatus{
+            margin-bottom:3%;
+            text-align: right;
+
+        }
+
+        .activeCar{
+            color:white;
+        }
+
+        .carImg{
+            border: 1px solid white;
+            margin-top:2%;
+            margin-bottom: 2%;
+        }
+
+        .carInfo{
+            width: 100%;
+        }
+
+        .linkToDashboard{
+            margin-top: 2%;
+            margin-bottom: 2%;
+        }
+
+        .selectedPeriodForm{
+            width: 100%;
+            padding:2%;
+            display:inline;
+        }
+
+        .selectedPeriodForm .form-control{
+            width:auto;
+            display:inline;
+        }
+
+        .infoSide{
+            font-size: 1.1em;
+            color:white;
+            font-weight:bolder;
+        }
+
+        .changeCar{
+            margin-bottom: 2%;
+        }
+
+        td{
+            color:lightgray;
+        }
+
+        .currentStatus p{
+            font-size:1.1em;
+            margin:0;
+            display:inline;
+        }
+
+        .changeCar a {
+            text-decoration: none;
+        }
+        .changeCar input {
+            margin: auto;
+            width: 100%;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col">
+            <h1 class="display-4">Info & Statistics</h1>
+        </div>
+
+        <div class="col">
+            <div class="currentStatus">
+
+                <p class="text-muted">User logged: <span th:text="${#request.userPrincipal.principal.username}"></span></p>
+                <br/>
+                <p class="text-muted">Selected car:
+
+                    <span th:if="${activeCar.getBrand() != null}">
+							<span class="activeCar" th:text="${activeCar.getBrand() + ' ' + activeCar.getModel() 
+							+ ' ' + activeCar.getCarYear() + ' ' + activeCar.getCarEngine()}">
+							</span>
+						</span>
+
+                    <span	th:unless="${activeCar.getBrand() != null}">
+							<span class="activeCar" th:text="${noCarSelected}"></span>
+						</span>
+
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <h3 class="alert alert-info carInfo">Car Info</h3>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col">
+            <span th:if="${photoBytes!=null && !(photoBytes.isEmpty())}">
+					<img class="carImg"  height="260px" alt="car image" th:src="@{'data:image/jpeg;base64,'+${photoBytes}}" />
+				</span>
+            <span th:if="${photoBytes.isEmpty()}">
+					<img height="260px" alt="car image" th:src="@{/images/noimage.png}">
+				</span>
+
+            <span th:if="${photoBytes==null }">
+					<img height="260px" alt="car image" th:src="@{/images/noimage.png}">
+				</span>
+
+        </div>
+
+        <div class="col">
+
+            <table class="table">
+
+                <tbody>
+
+                <tr><td> Mileage: <span class="infoSide" th:text="${activeCar.getMileage()}"></span>  </td></tr>
+                <tr><td> Fuel Type: <span class="infoSide" th:text="${activeCar.getFuelType()}"></span> </td></tr>
+                <tr><td> Average Repair Cost:  <span class="infoSide" th:text="${averageRepairCost}"></span> <span>&#8364;</span></td></tr>
+                <tr><td> Average Fuel Consumption:  <span class="infoSide" th:text="${averageFuelConsumption}"></span> l/km</td></tr>
+                <tr><td> Last Service Date: <span class="infoSide" th:text="${lastServiceDate}"></span></td></tr>
+                <tr><td> Registration Date: <span class="infoSide" th:text="${#dates.format(activeCar.getRegistrationDate(), 'dd-MMM-yyyy')}"></span> </td></tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <h3 class="alert alert-info carInfo">General Statistics</h3>
+
+        <table class="table">
+
+            <tbody>
+
+            <tr>
+                <td> Average Fuel Price:  <span class="infoSide" th:text="${averageFuelPriceGeneral}"></span> <span>&#8364;</span></td>
+                <td>Average Fuel Consumption: <span class="infoSide" th:text="${averageGeneralFuelConsumption}"></span> l/km</td>
+            </tr>
+
+            <tr>
+                <td> Average Repair Cost: <span class="infoSide" th:text="${averageRepairPriceGeneral}"></span> <span>&#8364;</span></td>
+                <td>Last Fuel Consumption: <span class="infoSide" th:text="${lastFuelConsumption}"></span> l/km</td>
+            </tr>
+
+            </tbody>
+
+        </table>
+
+        <h3 class="alert alert-info carInfo">Statistics For Selected Period</h3>
+        <form class="selectedPeriodForm" method="POST" th:action="@{/info}" th:object="${period}">
+            <select class="form-control" name="type">
+
+                <option>Fuel</option>
+                <option>Service</option>
+
+            </select>
+
+            <label>From:</label>
+            <input class="form-control" type="date" th:name="startDate" />
+
+            <label>To:</label>
+            <input class="form-control" type="date" th:name="endDate" />
+
+            <input class="btn btn-primary" type="submit" />
+
+        </form>
+        <table class="table">
+            <tbody>
+
+            <span th:if="${type=='Fuel'}">
+
+							<tr>
+								<td>
+									<label>Average Fuel Cost:</label>
+									<span th:text="${averageFuelCost}" class="infoSide"></span><span> &#8364;</span>
+
+								</td>
+
+								<td>
+									<label>Total Fuel Cost:</label>
+									<span th:text="${totalFuelCost}" class="infoSide"></span><span> &#8364;</span>
+
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<label>Number of Fuel Expenses:</label>
+									<span th:text="${numberOfFuelExpenses}" class="infoSide"></span>
+
+								</td>
+
+								<td>
+									<label>Number of Liters:</label>
+									<span th:text="${numberOfLiters}" class="infoSide"></span> <span> l</span>
+
+								</td>
+							</tr>
+
+					</span>
+
+            <span th:if="${type=='Service'}">
+
+							<tr>
+								<td>
+									<label>Average Service Cost:</label>
+									<span th:text="${averageRepairCost}" class="infoSide"></span><span> &#8364;</span>
+
+								</td>
+
+								<td>
+									<label>Total Service Cost:</label>
+									<span th:text="${totalRepairCost}" class="infoSide"></span><span> &#8364;</span>
+
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<label>Number of Service Expenses:</label>
+									<span th:text="${numberOfRepairExpenses}" class="infoSide"></span>
+
+								</td>
+
+
+							</tr>
+
+					</span>
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <span th:if="${activeCar.getBrand() == null}">
+
+					<div class="changeCar">
+						<a href="addCar"><input type="button" class="btn btn-light btn-lg expenseButtons"  value="Add a Car"/></a>
+					</div>
+
+				</span>
+
+    <span th:unless="${activeCar.getBrand() == null}">
+
+					<div class="changeCar">
+					<a href="cars"><input type="button" class="btn btn-light btn-lg expenseButtons"  value="Change Car"/></a>
+
+					</div>
+
+		</span>
+
+
+    <form th:action="@{/logout}" method="POST">
+        <input class="btn btn-secondary form-control" type="submit" value="Logout" />
+    </form>
+
+    <div class="linkToDashboard">
+        <a href="/"> &#8592; Back to Dashboard</a>
+    </div>
+
+
+</div>
+
+</body>
+</html>

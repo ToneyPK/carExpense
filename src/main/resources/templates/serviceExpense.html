@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<title>Car Expense</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/superhero/bootstrap.min.css" >
+
+	<style type="text/css">
+	
+	textarea{
+	min-height: 100px;
+	}
+	
+	.container{
+		max-width: 600px;
+		margin-top:3%;
+		}
+		
+	.currentStatus{
+		margin-bottom:3%;
+		}
+		
+	.currentStatus p{
+		font-size:1.1em;
+		margin:0;
+		}
+		
+	.activeCar{
+		color:white;
+		}
+		
+	.btn{
+		width:100%;
+		margin-top: 3%;
+	}		
+	
+	.changeCar a {
+		text-decoration: none;
+		}
+	.form-control{
+		width:100%;
+	}	
+		
+	.row{
+		margin-top: 2%;
+	}		
+	
+	.viewList{
+		float:right;
+	}
+	
+	p.successMessage{
+    	color: lightgreen;
+    	margin-top: 2%;
+    	margin-bottom: 0;
+	}		
+	
+	</style>
+</head>
+
+
+	<body>
+
+		<div class="container">
+			<h1 class="display-4">New Repair Expense</h1>
+				<div class="currentStatus">
+				
+					<p class="text-muted">User logged: <span th:text="${#request.userPrincipal.principal.username}"></span></p>
+					<p class="text-muted">Selected car: <span class="activeCar" th:text="${activeCar.getBrand() + ' ' + activeCar.getModel() + ' ' + activeCar.getCarYear() + ' ' + activeCar.getCarEngine()}"></span></p>
+			
+				</div>
+			
+			<form th:action="@{/serviceExpense}" th:object="${serviceExpense}" method="post">
+			
+				<div class="row">
+				
+					<div class="col">
+						<label>Repair Name</label>
+						<input placeholder="Fuel Filter Change" class="form-control" th:field="*{serviceName}" type="text" />
+					</div>
+					
+					<div class="col">
+						<label>Repair Cost in <span>&#8364;</span></label>
+						<input class="form-control" th:field="*{serviceCost}" type="text" />
+										
+					</div>
+				
+				</div>
+				
+				<div class="row">
+				
+					<div class="col">
+				
+						<label>Repair Description</label>
+						<textarea placeholder="Service done at Toyota Random Service. Things serviced include a new fuel filter and hose." class="form-control " th:field="*{description}"></textarea>	
+								
+					</div>
+				
+				</div>
+				
+				<div class="row">
+				
+					<div class="col">
+				
+						<label>Current Mileage</label>
+						<input type="text" th:name="mileage" class="form-control " th:value="${currentMileage}"/>	
+								
+					</div>
+				
+				</div>
+						
+			<p class="successMessage" th:text="${successMessage}"></p>			
+			<input class="btn btn-primary btn-lg" type="submit" />
+			
+			<span th:text="${noCarSelected}"></span>
+			
+			</form>
+			
+			<div class="changeCar">
+				<a href="/cars"><input type="button" class="btn btn-light btn-lg expenseButtons"  value="Change Car"/></a>
+			</div>
+
+			<br>
+			
+			<a href="/"> &#8592; Back to Dashboard</a>
+			<a class="viewList" href="/serviceExpense/list">View Repair Expense List &#8594;</a>
+		</div>
+
+	</body>
+</html>

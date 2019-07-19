@@ -16,12 +16,16 @@
 		.btn{
 		width:100%;			
 		}
-		
+
+	.isActive{
+		border: 1px solid green;
+	}
 	.table th, .table td {
         	vertical-align: middle;
     	}
     .table{
     	margin-top:3%;
+    	width: 100%;
     }	
 		
 	}
@@ -37,36 +41,39 @@
 		<h1 class="display-4">My Car List:</h1>
 	
 		<table class="table table-striped">
-		
-			<tbody>
-			
+
+				<tbody>
+
 			<thead class="thead-dark">
 				<tr>
+					
 		       	 	<th>Brand</th>
 		        	<th>Model</th>
 		        	<th>Year</th>
-		        	<th>Engine</th>
+		        	<th>Mileage</th>
+		        	
 		        </tr>
 			</thead>
 			
-		    
+
 		      <tr th:each="car : ${getCar}">
-		       		
+
 		       		<td th:text="${car.brand}"></td>
 			        <td th:text="${car.model}"></td>
 			        <td th:text="${car.carYear}"></td>
-			        <td th:text="${car.carEngine}"></td>
+			        <td th:text="${car.mileage}"></td>
+				  	<td><span th:if="${car.isActive()}"><</span></td>
 			        
 			        <td>
 			        	<form th:action="@{|/cars/activate/${car.getiD()}|}" method="post">
-			       	 <input class="btn btn-success" value="Select" type="submit" />
-			        </form>
+			       	 		<input class="btn btn-success" value="Select" type="submit" />
+			        	</form>
 			        </td>
 			        
 			        <td>
 			        	<form th:action="@{|/cars/${car.getiD()}|}" method="post">
-			        	<input class="btn btn-danger" value="Remove" type="submit" />
-			        </form> 
+			        		<input class="btn btn-danger" value="Remove" type="submit" />
+			        	</form> 
 			        </td>
 		      </tr>
 			

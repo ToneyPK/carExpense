@@ -24,6 +24,14 @@
 		
 	.row{
 	margin-top: 2%;
+	}
+	
+	.alertMessages{
+	margin-top: 2%;
+	}
+	
+	.alertMessages p{
+	margin: 0;
 	}	
 	
 	.currentStatus p{
@@ -75,7 +83,7 @@
 	
 		</div>
 		
-		<form th:action="@{/fuelExpense}" th:object="${fuelExpense}" method="post">
+		<form th:action="@{/fuelExpense}" th:object="${fuelExpense}" method="post" >
 		
 		<div class="row">
 		
@@ -92,19 +100,45 @@
 			
 			<div class="col">
 		
-				<div class="amountPaid">
-					<label>Amount Paid in <span>&#8364;</span></label>
-					<input class="form-control" th:field="*{amountPaid}" type="text" />	
+				<div class="fuelPrice">
+					<label>Fuel Price in <span>&#8364;</span></label>
+					<!-- <input class="form-control" th:field="*{fuelPrice}" th:value="${lastFuelPrice}" type="text" /> -->
+					<input class="form-control" th:value="${lastFuelPrice}" th:name="fuelPrice" th:id="fuelPrice"/>	
 				</div>
 		
 			</div>
+			
+			<div class="col">
+		
+				<div class="fuelPrice">
+					<label>Fuel Consumption (l/km)</label>
+					<input class="form-control" th:field="*{fuelConsumption}" type="text" />	
+				</div>
+		
+			</div>
+			
+			<!-- <div class="col">
+		
+				<div class="amountPaid">
+					<label>Amount Paid in <span>&#8364;</span></label>
+					<input class="form-control" th:field="*{amountPaid}" readonly="readonly" type="text" />	
+				</div>
+		
+			</div> -->
 						
 		</div>
+		
+		<div class="alertMessages">
 		
 			<span class="successMessage" th:text="${successMessage}"></span>
 			
 			<span class="noCarSelected" th:text="${noCarSelected}" ></span>
 			
+			<p th:text="${totalAmountMessage}"></p>
+		
+		
+		</div>								
+						
 			
 		<input class="btn btn-primary btn-lg" type="submit" />
 		

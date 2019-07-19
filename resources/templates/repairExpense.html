@@ -58,18 +58,18 @@
 			
 				</div>
 			
-			<form th:action="@{/repairExpense}" th:object="${repairExpense}" method="post">
+			<form th:action="@{/serviceExpense}" th:object="${serviceExpense}" method="post">
 			
 				<div class="row">
 				
 					<div class="col">
 						<label>Repair Name</label>
-						<input class="form-control" th:field="*{repairName}" type="text" />
+						<input class="form-control" th:field="*{serviceName}" type="text" />
 					</div>
 					
 					<div class="col">
 						<label>Repair Cost</label>
-						<input class="form-control" th:field="*{repairCost}" type="text" />
+						<input class="form-control" th:field="*{serviceCost}" type="text" />
 										
 					</div>
 				

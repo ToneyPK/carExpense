@@ -4,9 +4,9 @@ import com.carexpenses.entity.User;
 
 public interface UserService {
 
-	public void registerUser(User theUser);
-	public User getUserByUsername(String username);
-	public boolean checkIfUserExists(User theUser);
+	void registerUser(User theUser);
+	User getUserByUsername(String username);
+	boolean checkIfUserExists(User theUser);
 
 //	public String getLoggedInUser();
 	

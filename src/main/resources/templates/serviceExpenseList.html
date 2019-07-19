@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<title>Car Expense</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/superhero/bootstrap.min.css" >
+
+	<style type="text/css">
+		.container{
+			max-width: 600px;
+			margin-top:3%;
+			}
+	
+		.currentStatus{
+		margin-bottom:3%;
+		
+		}
+		.currentStatus{
+		margin-bottom:3%;
+		}
+		
+		.activeCar{
+		color:white;
+		}
+		
+		.currentStatus p{
+		font-size:1.1em;
+		margin:0;
+		}
+		
+		.btn{
+		width:100%;
+		margin-top: 3%;
+	}
+
+		.addNew{
+			float: right;
+			margin:0;
+		}
+	</style>
+</head>
+
+
+<body>
+
+	<div class="container">
+	
+		<h1 class="display-4">Repair Expense List</h1>
+				<div class="currentStatus">
+				
+					<p class="text-muted">User logged: <span th:text="${#request.userPrincipal.principal.username}"></span></p>
+					<p class="text-muted">Selected car: <span class="activeCar" th:text="${activeCar.getBrand() + ' ' + activeCar.getModel() + ' ' + activeCar.getCarYear() + ' ' + activeCar.getCarEngine()}"></span></p>
+			
+				</div>
+		<table class="table table-striped table-bordered">
+		
+		<tbody>
+		
+		<tr>
+		<thead class="thead-dark">
+			<th >Repair Name</th>
+	        <th>Repair Cost</th>
+	        <th>Date</th>
+	        <th>Description</th>
+	        <th>Mileage</th>
+	    
+		</thead>
+	      </tr>
+	      <tr th:each="serviceExpense : ${serviceExpenseList}">
+	        <td th:text="${serviceExpense.getServiceName()} "></td>
+	        <td th:text="${serviceExpense.getServiceCost()} + '&#8364;'"></td>
+	        <td th:text="${serviceExpense.getDate()}"></td>
+	        <td th:text="${serviceExpense.getDescription()}"></td>
+	        <td th:text="${serviceExpense.getMileage()}"></td>
+	        
+	      </tr>
+		
+		</tbody>
+		
+		</table>
+		
+		
+		<div class="changeCar">
+			<a href="/cars"><input type="button" class="btn btn-light btn-lg expenseButtons"  value="Change Car"/></a>
+		</div>
+		<br>
+		<a href="/">&#8592; Back to Dashboard</a>
+		<a class="addNew" href="/serviceExpense">Add Service &#8594;</a>
+	
+	</div>
+	
+</body>
+</html>

@@ -108,7 +108,7 @@
 		<div class="expenseButtons">
 
 			<a  href="fuelExpense"><input type="button" class="btn btn-primary btn-lg expenseButtons" value="New Fuel Expense"/></a>
-			<a href="repairExpense"><input type="button" class="btn btn-primary btn-lg expenseButtons"  value="New Repair Expense"/></a>
+			<a href="serviceExpense"><input type="button" class="btn btn-primary btn-lg expenseButtons"  value="New Repair Expense"/></a>
 						
 		</div>
 		
@@ -118,8 +118,8 @@
 		</div>
 
 		<div class="repairExpenses">
-			<p>Total Repair Expenses: <span th:text="${allRepairExpenses}"/> <span>&#8364;</span></p>
-			<a href="repairExpense/list">View Repair List</a>
+			<p>Total Repair Expenses: <span th:text="${allServiceExpens}"/> <span>&#8364;</span></p>
+			<a href="serviceExpense/list">View Repair List</a>
 		</div>		
 		
 		<p class="totalExpenses">Total expenses: <span th:text="${totalExpenses}"/> <span>&#8364;</span></p>

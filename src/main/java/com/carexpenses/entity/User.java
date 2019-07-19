@@ -1,5 +1,8 @@
 package com.carexpenses.entity;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,8 +28,7 @@ public class User {
 	
 	@Column(name = "enabled")
 	private boolean enabled;
-	
-	 
+
 	public User() {
 	}
 
@@ -36,15 +38,12 @@ public class User {
 		
 	}
 
-	
-
 	public User(String username, String password, boolean enabled) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 	}
 
-	
 	public User(String password, boolean enabled, UserRole userRole) {
 		this.password = password;
 		this.enabled = enabled;
@@ -59,7 +58,6 @@ public class User {
 		this.username = username;
 	}
 
-	
 	public String getPassword() {
 		return password;
 	}

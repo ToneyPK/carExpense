@@ -34,8 +34,11 @@
 		width:100%;
 		margin-top: 3%;
 	}
-		
+		.addNew{
+			float: right;
+			margin:0;
 		}
+
 	</style>
 
 </head>
@@ -61,6 +64,7 @@
 		<thead class="thead-dark">
 			<th>Fuel Amount</th>
         	<th>Amount Paid</th>
+        	<th>Consumption</th>
         	<th>Date</th>
 	    
 		</thead>
@@ -68,6 +72,7 @@
 	      <tr th:each="fuelExpense : ${fuelExpenseList}">
         <td th:text="${fuelExpense.getAmountOfLiters()} + 'L' "></td>
         <td th:text="${fuelExpense.getAmountPaid()} + '&#8364;'"></td>
+        <td th:text="${fuelExpense.getFuelConsumption()} + ' l/km'"></td>
          <td th:text="${fuelExpense.getDate()} "></td>
 	        
 	      </tr>
@@ -82,6 +87,7 @@
 		</div>
 		<br>
 		<a href="/">&#8592; Back to Dashboard</a>
+		<a class="addNew" href="/fuelExpense">Add Fuel Expense &#8594;</a>
 		
 	
 	</div>

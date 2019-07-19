@@ -1,0 +1,179 @@
+
+
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>Car Expense</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/superhero/bootstrap.min.css" >
+
+    <style type="text/css">
+
+        .container{
+            max-width: 600px;
+            margin-top:3%;
+            margin-bottom:3%;
+        }
+
+        .form-control-file{
+            margin-left:3%;
+            margin-top: 3%;
+            width: 50%;
+            display:inline;
+        }
+
+        .btn{
+            width:100%;
+            margin-top:3%;
+        }
+        .regDate{
+            margin-bottom: 0;
+            font-size: 26px;
+        }
+        .carImg{
+            display: block;
+            margin: 0 auto;
+            border: 1px solid white;
+        }
+        .imgContainer{
+            border-bottom: 1px solid white;
+            padding-bottom: 2%;
+            padding-top: 2%;
+            margin-bottom: 2%;
+            text-align: center;
+        }
+
+
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h1 class="display-4">Update Car:</h1>
+
+
+
+    <form th:action="@{/updateCar}" th:object="${car}" method="post" enctype="multipart/form-data">
+
+
+
+            <div class="row imgContainer">
+                <div class="col ">
+              <span th:if="${photoBytes!=null && !(photoBytes.isEmpty())}">
+					<img class="carImg"  height="260px" alt="car image" th:src="@{'data:image/jpeg;base64,'+${photoBytes}}" />
+				</span>
+                    <span th:if="${photoBytes.isEmpty()}">
+					<img class="carImg" height="260px" alt="car image" th:src="@{/images/noimage.png}">
+				</span>
+
+                    <span th:if="${photoBytes==null }">
+					<img class="carImg" height="260px" alt="car image" th:src="@{/images/noimage.png}">
+				</span>
+
+                    <span>Update Car Image:</span>
+                    <input class="form-control-file" th:name="photo"  type="file" />
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col">
+
+                    <label >Brand</label>
+                    <input class="form-control" th:name="brand" th:value="${car.getBrand()}" type="text" placeholder="ex: Toyota"/>
+                    <span th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">model Error</span>
+
+                </div>
+
+                <div class="col">
+
+                    <label >Model</label>
+                    <input class="form-control" th:name="model" th:value="${car.getModel()}" type="text" placeholder="ex: Corolla"/>
+                    <span th:if="${#fields.hasErrors('model')}" th:errors="*{model}">model Error</span>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col">
+                    <label >Year</label>
+                    <input class="form-control" th:name="carYear" type="number" th:value="${car.getCarYear()}" placeholder="ex: 1995"/>
+                    <span th:if="${#fields.hasErrors('carYear')}" th:errors="*{carYear}">model Error</span>
+                </div>
+
+                <div class="col">
+
+                    <label >Engine</label>
+                    <input class="form-control" th:name="carEngine" th:value="${car.getCarEngine()}" type="text" placeholder="ex: 1.6 vvti" />
+                    <span th:if="${#fields.hasErrors('carEngine')}" th:errors="*{carEngine}">model Error</span>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="col">
+                    <label >Current Milage</label>
+                    <input class="form-control" th:name="mileage" th:value="${car.getMileage()}" type="text" placeholder="ex: 185 234"/>
+                    <span th:if="${#fields.hasErrors('mileage')}" th:errors="*{mileage}">model Error</span>
+                </div>
+
+                <div class="col">
+
+                    <label >Fuel Type</label>
+
+                    <select class="form-control" th:name="fuelType" th:value="${car.getCarEngine()}">
+                        <option th:value="'Petrol'" th:text="Petrol"></option>
+                        <option th:value="'Diesel'" th:text="Diesel"></option>
+                        <option th:value="'Hybrid'" th:text="Hybrid"></option>
+                        <option th:value="'Electric'" th:text="Electric"></option>
+                        <option th:value="'LPG'" th:text="LPG-Autogas"></option>
+                    </select>
+
+                    <span th:if="${#fields.hasErrors('fuelType')}" th:errors="*{fuelType}">model Error</span>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col">
+                    <label>Current Registration Date</label>
+                    <p class="regDate" th:text="${#dates.format(car.getRegistrationDate(), 'dd-MMM-yyyy')}"></p>
+                </div>
+
+                <div class="col">
+                    <label >New Registration Date</label>
+                    <input th:name="registrationDate" th:value="${#dates.format(car.getRegistrationDate(), 'yyyy-MM-dd')}" class="form-control date" type="date" />
+                    <span th:if="${#fields.hasErrors('registrationDate')}" th:errors="*{registrationDate}">model Error</span>
+                </div>
+
+            </div>
+
+        <input class="btn btn-primary btn-lg" type="submit" />
+
+    </form>
+
+    <div class="changeCar">
+        <a href="/cars"><input type="button" class="btn btn-light btn-lg expenseButtons"  value="Change Car"/></a>
+    </div>
+    <br>
+    <a href="/">&#8592; Back to Dashboard</a>
+
+
+</div>
+
+</body>
+</html>

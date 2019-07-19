@@ -62,9 +62,9 @@
 	    
 		</thead>
 	      </tr>
-	      <tr th:each="repairExpense : ${repairExpenseList}">
-	        <td th:text="${repairExpense.getRepairName()} "></td>
-	        <td th:text="${repairExpense.getRepairCost()} + '&#8364;'"></td>
+	      <tr th:each="serviceExpense : ${repairExpenseList}">
+	        <td th:text="${serviceExpense.getRepairName()} "></td>
+	        <td th:text="${serviceExpense.getRepairCost()} + '&#8364;'"></td>
 	        
 	      </tr>
 		

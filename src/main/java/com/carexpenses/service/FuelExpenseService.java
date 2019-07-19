@@ -7,8 +7,8 @@ import com.carexpenses.entity.FuelExpense;
 
 public interface FuelExpenseService{
 
-	public List<FuelExpense> getAll();
-	public void addFuelExpense(FuelExpense theFuelExpense);
-	public List<FuelExpense> getActiveFuelExpenses();
-	
+	List<FuelExpense> getAll();
+	void addFuelExpense(FuelExpense theFuelExpense);
+	List<FuelExpense> getActiveFuelExpenses();
+	List<FuelExpense> fuelExpensesByUser();
 }

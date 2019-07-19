@@ -10,12 +10,14 @@
 	<style type="text/css">
 	
 		.container{
-		max-width: 600px;
+		max-width: 900px;
 		margin-top:3%;
 		}
 		
 		.currentStatus{
 		margin-bottom:3%;
+		text-align: right;
+		
 		}
 		
 		.expenseButtons{
@@ -53,9 +55,36 @@
 		.activeCar{
 		color:white;
 		}
+		
+		.carInfoBtn{
+		margin-top: 6%;
+		margin-bottom:0;
+		
+		display:inline;
+		width: 100%;
+		
+		}
+
+		.changeCar{
+			margin-top: 1%;
+		}
+		
+		.carImg{
+		border: 1px solid white;
+		margin-top:2%;
+		}
+		
+		.carInfo col{
+		padding:0px 0px;
+		}
+		.carInfoBtn a{
+		text-decoration: none;
+		}
+		
 		.currentStatus p{
 		font-size:1.1em;
 		margin:0;
+		display:inline;
 		}
 		
 		.fuelExpenses p{
@@ -73,7 +102,9 @@
 		.changeCar a {
 		text-decoration: none;
 		}
-		
+		.changeCar input {
+		margin: auto;
+		}
 		
 	</style>
 
@@ -83,64 +114,116 @@
 <body>
 
 	<div class="container">
-
-		<h1 class="display-4">My Dashboard</h1>
-		
-		<div class="currentStatus">
-		
-			<p class="text-muted">User logged: <span th:text="${#request.userPrincipal.principal.username}"></span></p>
-			<p class="text-muted">Selected car:
-				
-				<span th:if="${activeCar.getBrand() != null}"> 
-					<span class="activeCar" th:text="${activeCar.getBrand() + ' ' + activeCar.getModel() 
-					+ ' ' + activeCar.getCarYear() + ' ' + activeCar.getCarEngine()}">
-					</span>
-				</span>
-				
-				<span	th:unless="${activeCar.getBrand() != null}">
-					<span class="activeCar" th:text="${noCarSelected}"></span>
-				</span>
-				
-			</p>
 	
+	<div class="row">
+	
+		<div class="col">
+		
+			<h1 class="display-4">My Dashboard</h1>
+		
 		</div>
+			
+		<div class="col">
+			
+			<div class="currentStatus">
 				
-		<div class="expenseButtons">
-
-			<a  href="fuelExpense"><input type="button" class="btn btn-primary btn-lg expenseButtons" value="New Fuel Expense"/></a>
-			<a href="repairExpense"><input type="button" class="btn btn-primary btn-lg expenseButtons"  value="New Repair Expense"/></a>
+					<p class="text-muted">User logged: <span th:text="${#request.userPrincipal.principal.username}"></span></p>
+					<br/>
+					<p class="text-muted">Selected car: 
 						
+						<span class="activeCar" th:text="${activeCar.getBrand() + ' ' + activeCar.getModel()
+							+ ' ' + activeCar.getCarYear() + ' ' + activeCar.getCarEngine()}">
+						</span>
+						
+					</p>
+			
+				</div>
+		
+			</div>			
+		
 		</div>
+			
+		<div class="row">
 		
-		<div class="fuelExpenses">
-			<p>Total Fuel Expenses: <span th:text="${allFuelExpenses}"/> <span>&#8364;</span></p>
-			<a href="fuelExpense/list">View Fuel List</a> 
-		</div>
-
-		<div class="repairExpenses">
-			<p>Total Repair Expenses: <span th:text="${allRepairExpenses}"/> <span>&#8364;</span></p>
-			<a href="repairExpense/list">View Repair List</a>
-		</div>		
+			<div class="col">
+						
+			
+				<div class="expenseButtons">
 		
-		<p class="totalExpenses">Total expenses: <span th:text="${totalExpenses}"/> <span>&#8364;</span></p>
+					<a  href="fuelExpense"><input type="button" class="btn btn-primary btn-lg expenseButtons" value="New Fuel Expense"/></a>
+					<a href="serviceExpense"><input type="button" class="btn btn-primary btn-lg expenseButtons"  value="New Service Expense"/></a>
+								
+				</div>
+				
+				<div class="fuelExpenses">
+					<p>Total Fuel Expenses: <span th:text="${allFuelExpenses}"/> <span>&#8364;</span></p>
+					<a href="fuelExpense/list">View Fuel List</a> 
+				</div>
 		
-		<span th:if="${activeCar.getBrand() == null}">
-		
-			<div class="changeCar">
-				<a href="addCar"><input type="button" class="btn btn-light btn-lg expenseButtons"  value="Add a Car"/></a>
+				<div class="repairExpenses">
+					<p>Total Servicing Expenses: <span th:text="${allServiceExpenses}"/> <span>&#8364;</span></p>
+					<a href="serviceExpense/list">View Service List</a>
+				</div>		
+				
+				<p class="totalExpenses">Total expenses: <span th:text="${totalExpenses}"/> <span>&#8364;</span></p>
+				
 			</div>
-		
-		</span>
+				
+				
+			<div class="col carInfo">
 
-		<span th:unless="${activeCar.getBrand() == null}">
-		
-			<div class="changeCar">
-			<a href="cars"><input type="button" class="btn btn-light btn-lg expenseButtons"  value="Change Car"/></a>
-		
+
+				<span th:if="${photoBytes!=null && !(photoBytes.isEmpty())}">
+					<img class="carImg"  height="260px" alt="car image" th:src="@{'data:image/jpeg;base64,'+${photoBytes}}" />
+				</span>
+				<span th:if="${photoBytes.isEmpty()}">
+					<img height="260px" alt="car image" th:src="@{/images/noimage.png}">
+				</span>
+
+				<span th:if="${photoBytes==null }">
+					<img height="260px" alt="car image" th:src="@{/images/noimage.png}">
+				</span>
+
+				<div class="row">
+				
+					<div class="col">
+				
+						<a href="/info"><input class="btn btn-lg btn-info carInfoBtn" type="button" value="Info & Statistics" /></a>
+							
+					</div>
+					
+					<div class="col">
+				
+						<a href="/updateCar"><input class="btn btn-lg btn-warning carInfoBtn" type="button" value="Update Car" /></a>
+							
+					</div>
+					
+			
+				
+				</div>
+									
+			</div>
+					
 		</div>
 		
-		 </span>
+						
+		<span th:if="${activeCar.getBrand() == null}">
+				
+					<div class="changeCar">
+						<a href="addCar"><input type="button" class="btn btn-light btn-lg expenseButtons"  value="Add a Car"/></a>
+					</div>
+				
+				</span>
 		
+				<span th:unless="${activeCar.getBrand() == null}">
+				
+					<div class="changeCar">
+					<a href="cars"><input type="button" class="btn btn-light btn-lg expenseButtons"  value="Change Car"/></a>
+				
+					</div>
+				
+				</span>
+								
 		
 		<form th:action="@{/logout}" method="POST">
 			<input class="btn btn-secondary form-control" type="submit" value="Logout" />

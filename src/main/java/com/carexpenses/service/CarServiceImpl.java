@@ -18,6 +18,9 @@ public class CarServiceImpl implements CarService {
 	private CarRepository carRepository;
 	
 	@Autowired
+	private ServiceExpenseService serviceExpenseService;
+	
+	@Autowired
 	public CarServiceImpl(CarRepository carRepository) {
 		this.carRepository = carRepository;
 	}
@@ -30,11 +33,40 @@ public class CarServiceImpl implements CarService {
 	@Override
 	@Transactional
 	public void addCar(Car theCar) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String user  = auth.getName(); //get logged in username
+	    String user  = getLoggedInUsername();
 		
 		theCar.setCarOwner(user);
 		carRepository.save(theCar);
+	}
+
+	@Transactional
+	@Override
+	public void updateCar(Car theCar){
+		Car carToSave = getActiveCar();
+
+		carToSave.setMileage(theCar.getMileage());
+		carToSave.setBrand(theCar.getBrand());
+		carToSave.setCarEngine(theCar.getCarEngine());
+		saveCarIfPhotoBytesExist(theCar, carToSave);
+		carToSave.setFuelType(theCar.getFuelType());
+		carToSave.setRegistrationDate(theCar.getRegistrationDate());
+		carToSave.setCarYear(theCar.getCarYear());
+		carToSave.setModel(theCar.getModel());
+
+		carRepository.save(carToSave);
+	}
+
+	private void saveCarIfPhotoBytesExist(Car theCar, Car carToSave) {
+		if(!(theCar.getPhotoBytes() == null)){
+			carToSave.setPhotoBytes(theCar.getPhotoBytes());
+		}
+	}
+
+	public String getLoggedInUsername(){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username  = auth.getName(); //get logged in username
+
+		return username;
 	}
 
 	@Override
@@ -45,10 +77,8 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
-	
 	public List<Car> getCarsByOwner() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String user  = auth.getName(); //get logged in username
+		String user  = getLoggedInUsername();
 		
 		return carRepository.listCarsByOwner(user);
 	}
@@ -81,17 +111,13 @@ public class CarServiceImpl implements CarService {
 	public Car getActiveCar() {
 		Car activeCar = new Car();
 		List<Car> carList = getCarsByOwner();
-		
+
 		for (Car car : carList) {
 			if(car.isActive()==true) {
 				activeCar = car;
 			}
 		}
-		
 		return activeCar;
 	}
-
-	
-
 
 }

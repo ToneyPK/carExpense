@@ -18,7 +18,7 @@ public class UserRole {
 	
 
 	public UserRole() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public UserRole(String authority) {
