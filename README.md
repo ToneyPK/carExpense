@@ -10,10 +10,10 @@ Live Application on Heroku: https://car-expense.herokuapp.com/
 - Heroku & PostgreSQL
 
 # What I learned building this project:
-- Communication between Entities, Controllers, Repositories & Services
+- Improved understanding of communication between Entities, Controllers, Repositories & Services
 - Using Spring Data JPA with Hibernate
 - Implementing and validating User Authentication through Spring Security
-- Communication with MySQL database and validating database fields
+- Connection with MySQL database and validating database fields
 - Managing HTTP Requests (redirections and redirection models)
 - Using Thymeleaf to render data from the Back-End
 - Using Thymeleaf validation (th:if, th:unless)
