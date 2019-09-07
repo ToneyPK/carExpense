@@ -11,7 +11,7 @@ Live Application on Heroku: https://car-expense.herokuapp.com/
 - Bootstrap 4
 - Heroku & PostgreSQL
 
-# What I learned building this project:
+# What I've achieved by building this project:
 - Improved understanding of communication between Entities, Controllers, Repositories & Services
 - Using Spring Data JPA with Hibernate
 - Implementing and validating User Authentication through Spring Security
