@@ -2,7 +2,7 @@
 
 CarExpense is an application built to help its users keep track of spending their money on maintaining the cars they own.
 
-// Note: Please use pictures smaller than 1MB in size.
+// Note: Please use pictures less than 1MB in size.
 
 Live Application on Heroku: https://car-expense.herokuapp.com/
 
