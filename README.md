@@ -11,6 +11,11 @@ Live Application on Heroku: https://car-expense.herokuapp.com/
 - Bootstrap 4
 - Heroku & PostgreSQL
 
+# Initial idea brainstorming:
+
+![alt text](https://imgur.com/urnNH9b)
+
+
 # What I've achieved by building this project:
 - Improved understanding of communication between Entities, Controllers, Repositories & Services
 - Using Spring Data JPA with Hibernate
