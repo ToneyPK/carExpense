@@ -13,7 +13,7 @@ Live Application on Heroku: https://car-expense.herokuapp.com/
 
 # Initial idea brainstorming:
 
-![alt text](https://imgur.com/urnNH9b)
+![image link](https://i.imgur.com/urnNH9b.jpg)
 
 
 # What I've achieved by building this project:
